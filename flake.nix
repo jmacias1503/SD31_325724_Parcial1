@@ -12,5 +12,9 @@
 	python312Packages.pandas
       ];
     };
+    packages."x86_64-linux".default = pkgs.python3.pkgs.buildPythonPackage {
+      pname = "SD31_325724_ExParcial_1";
+      version = "0.1.0";
+    };
   };
 }
