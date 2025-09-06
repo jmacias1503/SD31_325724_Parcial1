@@ -22,5 +22,8 @@ if __name__ == "__main__":
     parser.add_argument('--host', metavar = '-H', required=True, type=str, help=
                         'DB host to connect (must be valid IP address)')
     args = parser.parse_args()
-    if not is_valid_ip_address(args.host):
-        raise ValueError("Invaid IP address")
+    host = args.host
+    if not is_valid_ip_address(host):
+        raise ValueError("Invalid IP address")
+    if not is_host_reachable(host):
+        raise Exception("Unreachable host")
