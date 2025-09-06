@@ -24,6 +24,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     host = args.host
     if not is_valid_ip_address(host):
-        raise ValueError("Invalid IP address")
+        raise argparse.ArgumentTypeError("Invalid IP address")
     if not is_host_reachable(host):
         raise Exception("Unreachable host")
