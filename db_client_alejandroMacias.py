@@ -1,4 +1,6 @@
 import argparse
+import platform
+import subprocess
 def is_valid_ip_address(ip_address: str) -> bool:
     values = ip_address.split('.')
     if len(values) != 4:
@@ -10,6 +12,11 @@ def is_valid_ip_address(ip_address: str) -> bool:
         except ValueError:
             return False
     return True
+def is_host_reachable(ip_address: str) -> bool:
+    TIMEOUT_SECONDS = 5
+    count_param = '-n' if platform.system().lower() == 'windows' else '-c'
+    command = ['ping', count_param, '4', '-q', '-W', str(TIMEOUT_SECONDS), ip_address]
+    return subprocess.call(command) == 0
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
     parser.add_argument('--host', metavar = '-H', required=True, type=str, help=
