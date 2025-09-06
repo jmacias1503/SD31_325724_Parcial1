@@ -19,8 +19,8 @@ def is_host_reachable(ip_address: str) -> bool:
     return subprocess.call(command) == 0
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
-    parser.add_argument('--host', metavar = '-H', required=True, type=str, help=
-                        'DB host to connect (must be valid IP address)')
+    parser.add_argument('--host', metavar = 'IPV4 address', required=True, type=str, help=
+                        'DB host to connect (must be valid IPV4 address)')
     args = parser.parse_args()
     host = args.host
     if not is_valid_ip_address(host):
