@@ -14,7 +14,8 @@ def is_valid_ip_address(ip_address: str) -> bool:
     return True
 def is_host_reachable(ip_address: str) -> bool:
     TIMEOUT_SECONDS = 5
-    ping_count_param = '-n' if platform.system().lower() == 'windows' else '-c'
+    is_windows_os = platform.system().lower() == 'windows'
+    ping_count_param = '-n' if is_windows_os else '-c'
     command = ['ping', ping_count_param, '4', '-q', '-W', str(TIMEOUT_SECONDS),
                ip_address]
     return subprocess.call(command) == 0
