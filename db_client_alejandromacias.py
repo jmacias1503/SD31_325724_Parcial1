@@ -18,10 +18,10 @@ def is_host_reachable(ip_address: str) -> bool:
     """
     Pings the host to see if it is reachable
     """
-    TIMEOUT_SECONDS: int = 5
+    timeout_seconds: int = 5
     is_windows_os = platform.system().lower() == 'windows'
     ping_count_param = '-n' if is_windows_os else '-c'
-    command = ['ping', ping_count_param, '4', '-q', '-W', str(TIMEOUT_SECONDS),
+    command = ['ping', ping_count_param, '4', '-q', '-W', str(timeout_seconds),
                ip_address]
     has_pinged_succesfully = subprocess.call(command, stdout=subprocess.DEVNULL) == 0
     return has_pinged_succesfully
@@ -57,13 +57,13 @@ def select_option() -> int:
     """
     Asks input of the user and returns a valid option
     """
-    VALID_OPTIONS = range(1, OPTION_COUNT + 1)
+    valid_options = range(1, OPTION_COUNT + 1)
     try:
         option_selected: int = int(input("Select an option: "))
     except TypeError:
         print(f"Not valid input")
         select_option()
-    if option_selected not in VALID_OPTIONS:
+    if option_selected not in valid_options:
         print("Option not valid. Try again")
         select_option()
     return option_selected
@@ -76,8 +76,8 @@ def create_payload(query_type: str, payload):
     """
     Creates the dict template for sending a payload to the server
     """
-    QUERY_TYPE_LIST = ("insert", "search")
-    if query_type not in QUERY_TYPE_LIST:
+    query_type_list = ("insert", "search")
+    if query_type not in query_type_list:
         raise TypeError("Query type not valid")
     template = {
         "query_type": query_type,
@@ -122,8 +122,8 @@ def search_student(argument: str, value, client_socket, host: str, port_number: 
     """
     Sends a payload for searching a student in the database
     """
-    VALID_ARGUMENTS = ["name", "age", "email", "gender"]
-    if argument not in VALID_ARGUMENTS:
+    valid_arguments = ("name", "age", "email", "gender")
+    if argument not in valid_arguments:
         raise TypeError("Argument not valid")
     search_payload = {
         "argument": argument,
