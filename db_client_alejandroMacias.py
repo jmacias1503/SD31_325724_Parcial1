@@ -14,6 +14,12 @@ def is_host_reachable(ip_address: str) -> bool:
     return has_pinged_succesfully
 def hash_password(unhashed_password: str) -> str:
     return hashlib.md5(unhashed_password).hexdigest()
+def has_socket_connection(socket_client) -> bool:
+    try:
+        socket_client.send(b'')
+        return True
+    except socket.error():
+        return False
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
     parser.add_argument('--host', default='127.0.0.1', nargs='?', type=str, help=
@@ -33,3 +39,5 @@ if __name__ == "__main__":
             socket.SOCK_STREAM
             )
     client_socket.connect(HOST, PORT_NUMBER)
+    if not has_socket_connection(client_socket):
+        raise Exception("Socket connection failed")
