@@ -20,8 +20,6 @@ def check_socket_connection(socket_client):
         socket_client.send(b'')
     except socket.error():
         raise Exception("Socket connection failed")
-def hash_password(unhashed_password: str) -> str:
-    return hashlib.md5(unhashed_password.encode()).hexdigest()
 def print_menu():
     print("DISTRIBUTED SYSTEMS SIMPLE DATABASE CLIENT\n
           SDBDSC  Copyright (C) 2025  Alejandro Macías
@@ -44,6 +42,8 @@ def select_option() -> int:
         print("Option not valid. Try again")
         select_option()
     return option_selected
+def hash_password(unhashed_password: str) -> str:
+    return hashlib.md5(unhashed_password.encode()).hexdigest()
 def add_student(client_socket):
     name: str = input("Enter student's name: ")
     password: str = hash_password(
