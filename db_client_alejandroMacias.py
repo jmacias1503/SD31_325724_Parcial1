@@ -1,3 +1,7 @@
+"""
+Simple database client for distributed systems exam. Can insert students to the
+database & search them
+"""
 import argparse
 import platform
 import subprocess
@@ -11,6 +15,9 @@ MENU_OPTIONS = ["Add student to database", "Search student", "Quit"]
 OPTION_COUNT: int = len(MENU_OPTIONS)
 SEARCH_OPTIONS = ["name", "email", "age", "gender"]
 def is_host_reachable(ip_address: str) -> bool:
+    """
+    Pings the host to see if it is reachable
+    """
     TIMEOUT_SECONDS: int = 5
     is_windows_os = platform.system().lower() == 'windows'
     ping_count_param = '-n' if is_windows_os else '-c'
@@ -19,11 +26,17 @@ def is_host_reachable(ip_address: str) -> bool:
     has_pinged_succesfully = subprocess.call(command, stdout=subprocess.DEVNULL) == 0
     return has_pinged_succesfully
 def check_socket_connection(socket_client):
+    """
+    Checks the connection between the host & the client
+    """
     try:
         socket_client.send(b'')
     except socket.error():
         raise Exception("Socket connection failed")
 def print_main_menu():
+    """
+    Prints the initial options menu when running the program
+    """
     print("DISTRIBUTED SYSTEMS SIMPLE DATABASE CLIENT\n",
           "SDBDSC  Copyright (C) 2025  Alejandro Macías\n"
           "This program comes with ABSOLUTELY NO WARRANTY.\n"
@@ -34,10 +47,16 @@ def print_main_menu():
         option_index: str = MENU_OPTIONS.index(option)
         print(option_index + ". " + option)
 def print_search_menu():
+    """
+    Prints the options for selecting the search argument
+    """
     for option in SEARCH_OPTIONS:
         option_index: str = SEARCH_OPTIONS.index(option)
         print(option_index + ". Search by " + option)
 def select_option() -> int:
+    """
+    Asks input of the user and returns a valid option
+    """
     VALID_OPTIONS = range(1, OPTION_COUNT + 1)
     try:
         option_selected: int = int(input("Select an option: "))
@@ -49,8 +68,14 @@ def select_option() -> int:
         select_option()
     return option_selected
 def hash_password(unhashed_password: str) -> str:
+    """
+    Inputs a string and hashes it with md5
+    """
     return hashlib.md5(unhashed_password.encode()).hexdigest()
 def create_payload(query_type: str, payload):
+    """
+    Creates the dict template for sending a payload to the server
+    """
     QUERY_TYPE_LIST = ("insert", "search")
     if query_type not in QUERY_TYPE_LIST:
         raise TypeError("Query type not valid")
@@ -61,6 +86,9 @@ def create_payload(query_type: str, payload):
     }
     return template
 def send_payload(payload, client_socket, host: str, port_number: int):
+    """
+    Encodes the data for payload sending, checks connection & sends the payload
+    """
     serialized_data = json.dumps(payload).encode('utf-8')
     len_payload = len(serialized_data)
     client_socket.connect(host, port_number)
@@ -69,6 +97,9 @@ def send_payload(payload, client_socket, host: str, port_number: int):
     client_socket.send(serialized_data)
     client_socket.close()
 def add_student(client_socket, host: str, port_number: int):
+    """
+    Adds a student object to the database through the payload
+    """
     name: str = input("Enter student's name: ")
     password: str = hash_password(
             askpass(prompt="Enter student's password: ", mask="*")
@@ -88,6 +119,9 @@ def add_student(client_socket, host: str, port_number: int):
     payload = create_payload("insert", student)
     send_payload(payload, client_socket, host, port_number)
 def search_student(argument: str, value, client_socket, host: str, port_number: int):
+    """
+    Sends a payload for searching a student in the database
+    """
     VALID_ARGUMENTS = ["name", "age", "email", "gender"]
     if argument not in VALID_ARGUMENTS:
         raise TypeError("Argument not valid")
