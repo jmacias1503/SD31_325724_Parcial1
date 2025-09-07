@@ -23,7 +23,9 @@ def check_socket_connection(socket_client):
         raise Exception("Socket connection failed")
 def add_student(client_socket) -> str:
     name: str = input("Enter student's name: ")
-    password: str = hash_password(askpass(prompt="Enter student's password: ", mask="*"))
+    password: str = hash_password(
+            askpass(prompt="Enter student's password: ", mask="*")
+            )
     gender: str = input("Enter student's gender: ")
     age: int = int(input("Enter student's age: "))
     email: str = input("Enter student's email: ")
