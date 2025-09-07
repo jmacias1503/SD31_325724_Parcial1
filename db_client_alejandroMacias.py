@@ -43,6 +43,7 @@ def print_menu():
           1. Add student to database
           2. Search by name
           3. Search by age
+          4. Quit
           ")
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
