@@ -22,7 +22,7 @@ def check_socket_connection(socket_client):
         socket_client.send(b'')
     except socket.error():
         raise Exception("Socket connection failed")
-def print_menu():
+def print_main_menu():
     print("DISTRIBUTED SYSTEMS SIMPLE DATABASE CLIENT\n
           SDBDSC  Copyright (C) 2025  Alejandro Macías
           This program comes with ABSOLUTELY NO WARRANTY.
