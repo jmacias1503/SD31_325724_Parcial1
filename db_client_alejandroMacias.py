@@ -62,6 +62,21 @@ def add_student(client_socket):
     serialized_data = json.dumps(payload).encode('utf-8')
     check_socket_connection(client_socket)
     client_socket.send(serialized_data)
+def search_student(argument: str, value, client_socket):
+    VALID_ARGUMENTS = ["name", "age", "email", "gender"]
+    if argument not in VALID_ARGUMENTS:
+        raise TypeError("Argument not valid")
+    payload = {
+        "query_type": "search",
+        "timestamp": float(time.time()),
+        "payload": {
+            "argument": str(argument)
+            "value": value
+        }
+    }
+    serialized_data = json.dumps(payload).encode('utf-8')
+    check_socket_connection(client_socket)
+    client_socket.send(serialized_data)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
     parser.add_argument('--host', default='127.0.0.1', nargs='?', type=str, help=
