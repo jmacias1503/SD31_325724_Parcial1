@@ -41,10 +41,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
     HOST: str = args.host
     PORT_NUMBER: int = args.port
-    if not is_valid_ip_address(host):
+    if not is_valid_ip_address(HOST):
         raise argparse.ArgumentTypeError("Invalid IP address")
     print("Attempting communication with host...")
-    if not is_host_reachable(host):
+    if not is_host_reachable(HOST):
         raise Exception("Unreachable host. Connection timeout")
     client_socket = socket.socket(
             socket.AF_INET,
