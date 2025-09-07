@@ -61,7 +61,14 @@ def add_student(client_socket):
     password: str = hash_password(
             askpass(prompt="Enter student's password: ", mask="*")
             )
-    gender: str = input("Enter student's gender: ")
+    gender: str = input("Enter student's gender (M: male, F: female, O: other): ")
+    match gender:
+        case 'M':
+            gender = "male"
+        case 'F':
+            gender = "female"
+        case 'O':
+            gender = "other"
     age: int = int(input("Enter student's age: "))
     email: str = input("Enter student's email: ")
     major: str = input("Enter student's major: ")
