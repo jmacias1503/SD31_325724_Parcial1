@@ -44,6 +44,12 @@ def select_option() -> int:
     return option_selected
 def hash_password(unhashed_password: str) -> str:
     return hashlib.md5(unhashed_password.encode()).hexdigest()
+def send_payload(payload, client_socket):
+    serialized_data = json.dumps(payload).encode('utf-8')
+    len_payload = len(serialized_data)
+    check_socket_connection(client_socket)
+    client_socket.send(len_payload.to_bytes(4, 'big'))
+    client_socket.send(serialized_data)
 def add_student(client_socket):
     name: str = input("Enter student's name: ")
     password: str = hash_password(
@@ -59,9 +65,7 @@ def add_student(client_socket):
         "timestamp": float(time.time()),
         "payload": student
     }
-    serialized_data = json.dumps(payload).encode('utf-8')
-    check_socket_connection(client_socket)
-    client_socket.send(serialized_data)
+    send_payload(payload, client_socket)
 def search_student(argument: str, value, client_socket):
     VALID_ARGUMENTS = ["name", "age", "email", "gender"]
     if argument not in VALID_ARGUMENTS:
@@ -74,9 +78,7 @@ def search_student(argument: str, value, client_socket):
             "value": value
         }
     }
-    serialized_data = json.dumps(payload).encode('utf-8')
-    check_socket_connection(client_socket)
-    client_socket.send(serialized_data)
+    send_payload(payload, client_socket)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
     parser.add_argument('--host', default='127.0.0.1', nargs='?', type=str, help=
