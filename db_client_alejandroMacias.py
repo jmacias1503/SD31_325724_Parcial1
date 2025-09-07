@@ -3,7 +3,8 @@ import platform
 import subprocess
 import hashlib
 import socket
-from pickle import dumps as encode_object
+import time
+import json
 from common import is_valid_ip_address, Student
 from maskpass import askpass
 def is_host_reachable(ip_address: str) -> bool:
@@ -31,7 +32,12 @@ def add_student(client_socket):
     email: str = input("Enter student's email: ")
     major: str = input("Enter student's major: ")
     student = Student(name, password, gender, age, email, major)
-    serialized_data = encode_object(student)
+    payload = {
+        "type": "insert",
+        "timestamp": float(time.time()),
+        "payload": student
+    }
+    serialized_data = json.dumps(payload).encode('utf-8')
     check_socket_connection(client_socket)
     client_socket.send(serialized_data)
 def print_menu():
