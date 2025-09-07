@@ -50,6 +50,16 @@ def select_option() -> int:
     return option_selected
 def hash_password(unhashed_password: str) -> str:
     return hashlib.md5(unhashed_password.encode()).hexdigest()
+def create_payload(query_type: str, payload):
+    QUERY_TYPE_LIST = ("insert", "search")
+    if query_type not in QUERY_TYPE_LIST:
+        raise TypeError("Query type not valid")
+    template = {
+        "query_type": query_type,
+        "timestamp": float(time.time()),
+        "payload": payload
+    }
+    return template
 def send_payload(payload, client_socket, host: str, port_number: int):
     serialized_data = json.dumps(payload).encode('utf-8')
     len_payload = len(serialized_data)
@@ -75,24 +85,17 @@ def add_student(client_socket):
     email: str = input("Enter student's email: ")
     major: str = input("Enter student's major: ")
     student = Student(name, password, gender, age, email, major)
-    payload = {
-        "query_type": "insert",
-        "timestamp": float(time.time()),
-        "payload": student
-    }
+    payload = create_payload("insert", student)
     send_payload(payload, client_socket)
 def search_student(argument: str, value, client_socket):
     VALID_ARGUMENTS = ["name", "age", "email", "gender"]
     if argument not in VALID_ARGUMENTS:
         raise TypeError("Argument not valid")
-    payload = {
-        "query_type": "search",
-        "timestamp": float(time.time()),
-        "payload": {
-            "argument": str(argument)
-            "value": value
-        }
+    search_payload = {
+        "argument": argument,
+        "value": value
     }
+    payload = create_payload(insert, search_payload)
     send_payload(payload, client_socket)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
