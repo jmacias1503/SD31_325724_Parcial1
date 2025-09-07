@@ -32,6 +32,16 @@ def add_student(client_socket) -> str:
     serialized_data = pickle.dumps(student)
     check_socket_connection(client_socket)
     client_socket.send(serialized_data)
+def print_menu():
+    print("DISTRIBUTED SYSTEMS SIMPLE DATABASE CLIENT\n
+          SDBDSC  Copyright (C) 2025  Alejandro Macías
+          This program comes with ABSOLUTELY NO WARRANTY.
+          This is free software, and you are welcome to redistribute it
+          under certain conditions.\n
+          1. Add student to database
+          2. Search by name
+          3. Search by age
+          ")
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
     parser.add_argument('--host', default='127.0.0.1', nargs='?', type=str, help=
