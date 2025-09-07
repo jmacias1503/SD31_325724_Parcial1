@@ -24,12 +24,12 @@ def check_socket_connection(socket_client):
     except socket.error():
         raise Exception("Socket connection failed")
 def print_main_menu():
-    print("DISTRIBUTED SYSTEMS SIMPLE DATABASE CLIENT\n
-          SDBDSC  Copyright (C) 2025  Alejandro Macías
-          This program comes with ABSOLUTELY NO WARRANTY.
-          This is free software, and you are welcome to redistribute it
-          under certain conditions.\n
-          ")
+    print("DISTRIBUTED SYSTEMS SIMPLE DATABASE CLIENT\n",
+          "SDBDSC  Copyright (C) 2025  Alejandro Macías\n"
+          "This program comes with ABSOLUTELY NO WARRANTY.\n"
+          "This is free software, and you are welcome to redistribute it\n"
+          "under certain conditions.\n"
+          )
     for option in MENU_OPTIONS:
         option_index: str = MENU_OPTIONS.index(option)
         print(option_index + ". " + option)
