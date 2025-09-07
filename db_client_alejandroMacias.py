@@ -16,7 +16,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
     parser.add_argument('--host', required=True, type=str, help=
                         'DB host to connect (must be valid IPV4 address)')
-    parser.add_argument('--port', type=int, required=True, help=
+    parser.add_argument('--port', type=int, default=3000, nargs='?', help=
                         'Port number to use for connection')
     args = parser.parse_args()
     host = args.host
