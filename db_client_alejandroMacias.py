@@ -33,7 +33,7 @@ def add_student(client_socket):
     major: str = input("Enter student's major: ")
     student = Student(name, password, gender, age, email, major)
     payload = {
-        "type": "insert",
+        "query_type": "insert",
         "timestamp": float(time.time()),
         "payload": student
     }
