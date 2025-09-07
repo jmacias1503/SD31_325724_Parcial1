@@ -5,8 +5,8 @@ import hashlib
 import socket
 import time
 import json
-from common import is_valid_ip_address, Student
 from maskpass import askpass
+from common import is_valid_ip_address, Student
 MENU_OPTIONS = ["Add student to database", "Search student", "Quit"]
 OPTION_COUNT: int = len(MENU_OPTIONS)
 SEARCH_OPTIONS = ["name", "email", "age", "gender"]
