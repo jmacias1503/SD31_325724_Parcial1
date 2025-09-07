@@ -45,6 +45,17 @@ def print_menu():
           3. Search by age
           4. Quit
           ")
+def select_option() -> int:
+    VALID_OPTIONS = range(1,5)
+    try:
+        option_selected: int = int(input("Select an option: "))
+    except TypeError:
+        print(f"Not valid input")
+        select_option()
+    if option_selected not in VALID_OPTIONS:
+        print("Option not valid. Try again")
+        select_option()
+    return option_selected
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
     parser.add_argument('--host', default='127.0.0.1', nargs='?', type=str, help=
