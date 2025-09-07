@@ -28,5 +28,6 @@ if __name__ == "__main__":
     host = args.host
     if not is_valid_ip_address(host):
         raise argparse.ArgumentTypeError("Invalid IP address")
+    print("Attempting communication with host...")
     if not is_host_reachable(host):
-        raise Exception("Unreachable host")
+        raise Exception("Unreachable host. Connection timeout")
