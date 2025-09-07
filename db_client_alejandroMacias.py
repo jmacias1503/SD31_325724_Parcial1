@@ -14,8 +14,7 @@ def hash_password(unhashed_password: str) -> str:
     return hashlib.md5(unhashed_password).hexdigest()
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
-    parser.add_argument('--host', metavar = 'IPV4 address', required=True,
-                        type=str, help=
+    parser.add_argument('--host', required=True, type=str, help=
                         'DB host to connect (must be valid IPV4 address)')
     parser.add_argument('--port', type=int, required=True, help=
                         'Port number to use for connection')
