@@ -10,6 +10,7 @@
       packages = with pkgs; [
 	python312
 	python312Packages.pandas
+	linuxHeaders
       ];
     };
     packages."x86_64-linux".default = pkgs.python3.pkgs.buildPythonPackage {
