@@ -68,7 +68,7 @@ def send_payload(payload, client_socket, host: str, port_number: int):
     client_socket.send(len_payload.to_bytes(4, 'big'))
     client_socket.send(serialized_data)
     client_socket.close()
-def add_student(client_socket):
+def add_student(client_socket, host: str, port_number: int):
     name: str = input("Enter student's name: ")
     password: str = hash_password(
             askpass(prompt="Enter student's password: ", mask="*")
@@ -86,8 +86,8 @@ def add_student(client_socket):
     major: str = input("Enter student's major: ")
     student = Student(name, password, gender, age, email, major)
     payload = create_payload("insert", student)
-    send_payload(payload, client_socket)
-def search_student(argument: str, value, client_socket):
+    send_payload(payload, client_socket, host, port_number)
+def search_student(argument: str, value, client_socket, host: str, port_number: int):
     VALID_ARGUMENTS = ["name", "age", "email", "gender"]
     if argument not in VALID_ARGUMENTS:
         raise TypeError("Argument not valid")
@@ -96,7 +96,7 @@ def search_student(argument: str, value, client_socket):
         "value": value
     }
     payload = create_payload(insert, search_payload)
-    send_payload(payload, client_socket)
+    send_payload(payload, client_socket, host, port_number)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
     parser.add_argument('--host', default='127.0.0.1', nargs='?', type=str, help=
