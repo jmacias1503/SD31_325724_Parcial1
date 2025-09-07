@@ -9,10 +9,10 @@ if __name__ == "__main__":
     parser.add_argument('--port', default=3000, nargs='?', type=int, help=
                         'Port number to use (default 3000)')
     args = parser.parse_args()
-    if not is_valid_ip_address(args.address):
-        raise argparse.ArgumentTypeError("Invalid IP address")
     IP_ADDRESS: str = args.address
     PORT_NUMBER: int = args.port
+    if not is_valid_ip_address(IP_ADDRESS):
+        raise argparse.ArgumentTypeError("Invalid IP address")
     server_socket = socket.socket(
             socket.AF_INET,
             socket.SOCK_STREAM,
