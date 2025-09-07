@@ -1,6 +1,7 @@
 import argparse
 import platform
 import subprocess
+import hashlib
 def is_valid_ip_address(ip_address: str) -> bool:
     values = ip_address.split('.')
     if len(values) != 4:
@@ -19,6 +20,8 @@ def is_host_reachable(ip_address: str) -> bool:
     command = ['ping', ping_count_param, '4', '-q', '-W', str(TIMEOUT_SECONDS),
                ip_address]
     return subprocess.call(command, stdout=subprocess.DEVNULL) == 0
+def hash_password(unhashed_password: str) -> str:
+    return hashlib.md5(unhashed_password).hexdigest()
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
     parser.add_argument('--host', metavar = 'IPV4 address', required=True,
