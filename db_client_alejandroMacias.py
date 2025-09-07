@@ -30,6 +30,7 @@ def add_student(client_socket) -> str:
     major: str = input("Enter student's major: ")
     student = Student(name, password, gender, age, email, major)
     serialized_data = pickle.dumps(student)
+    check_socket_connection(client_socket)
     client_socket.send(serialized_data)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
