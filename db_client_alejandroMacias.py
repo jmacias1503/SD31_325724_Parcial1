@@ -16,12 +16,11 @@ def is_host_reachable(ip_address: str) -> bool:
     return has_pinged_succesfully
 def hash_password(unhashed_password: str) -> str:
     return hashlib.md5(unhashed_password).hexdigest()
-def has_socket_connection(socket_client) -> bool:
+def check_socket_connection(socket_client):
     try:
         socket_client.send(b'')
-        return True
     except socket.error():
-        return False
+        raise Exception("Socket connection failed")
 def add_student(client_socket) -> str:
     name: str = input("Enter student's name: ")
     password: str = hash_password(askpass(prompt="Enter student's password: ", mask="*"))
@@ -51,5 +50,4 @@ if __name__ == "__main__":
             socket.SOCK_STREAM
             )
     client_socket.connect(HOST, PORT_NUMBER)
-    if not has_socket_connection(client_socket):
-        raise Exception("Socket connection failed")
+    check_socket_connection(client_socket)
