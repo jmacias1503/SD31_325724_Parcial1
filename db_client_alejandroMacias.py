@@ -50,12 +50,14 @@ def select_option() -> int:
     return option_selected
 def hash_password(unhashed_password: str) -> str:
     return hashlib.md5(unhashed_password.encode()).hexdigest()
-def send_payload(payload, client_socket):
+def send_payload(payload, client_socket, host: str, port_number: int):
     serialized_data = json.dumps(payload).encode('utf-8')
     len_payload = len(serialized_data)
+    client_socket.connect(host, port_number)
     check_socket_connection(client_socket)
     client_socket.send(len_payload.to_bytes(4, 'big'))
     client_socket.send(serialized_data)
+    client_socket.close()
 def add_student(client_socket):
     name: str = input("Enter student's name: ")
     password: str = hash_password(
@@ -110,5 +112,3 @@ if __name__ == "__main__":
             socket.AF_INET,
             socket.SOCK_STREAM
             )
-    client_socket.connect(HOST, PORT_NUMBER)
-    check_socket_connection(client_socket)
