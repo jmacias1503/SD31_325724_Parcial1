@@ -18,7 +18,7 @@ def is_host_reachable(ip_address: str) -> bool:
     ping_count_param = '-n' if is_windows_os else '-c'
     command = ['ping', ping_count_param, '4', '-q', '-W', str(TIMEOUT_SECONDS),
                ip_address]
-    return subprocess.call(command) == 0
+    return subprocess.call(command, stdout=subprocess.DEVNULL) == 0
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
     parser.add_argument('--host', metavar = 'IPV4 address', required=True,
