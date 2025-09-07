@@ -2,6 +2,7 @@ import argparse
 import platform
 import subprocess
 import hashlib
+import socket
 from common import is_valid_ip_address
 def is_host_reachable(ip_address: str) -> bool:
     TIMEOUT_SECONDS: int = 5
@@ -20,9 +21,15 @@ if __name__ == "__main__":
     parser.add_argument('--port', type=int, default=3000, nargs='?', help=
                         'Port number to use for connection (Default: 3000)')
     args = parser.parse_args()
-    host = args.host
+    HOST: str = args.host
+    PORT_NUMBER: int = args.port
     if not is_valid_ip_address(host):
         raise argparse.ArgumentTypeError("Invalid IP address")
     print("Attempting communication with host...")
     if not is_host_reachable(host):
         raise Exception("Unreachable host. Connection timeout")
+    client_socket = socket.socket(
+            socket.AF_INET,
+            socket.SOCK_STREAM
+            )
+    client_socket.connect(HOST, PORT_NUMBER)
