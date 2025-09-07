@@ -15,7 +15,7 @@ def is_host_reachable(ip_address: str) -> bool:
     has_pinged_succesfully = subprocess.call(command, stdout=subprocess.DEVNULL) == 0
     return has_pinged_succesfully
 def hash_password(unhashed_password: str) -> str:
-    return hashlib.md5(unhashed_password).hexdigest()
+    return hashlib.md5(unhashed_password.encode()).hexdigest()
 def check_socket_connection(socket_client):
     try:
         socket_client.send(b'')
