@@ -3,7 +3,7 @@ import argparse
 from common import is_valid_ip_address
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple Database server")
-    parser.add_argument('--address', default='127.0.0.1', type=str, help=
+    parser.add_argument('--address', default='127.0.0.1', nargs='?', type=str, help=
                         'IP address for serving the database (default 127.0.0.1)')
     args = parser.parse_args()
     if not is_valid_ip_address(args.address):
