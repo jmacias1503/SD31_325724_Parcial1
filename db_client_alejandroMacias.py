@@ -24,6 +24,8 @@ if __name__ == "__main__":
     parser.add_argument('--host', metavar = 'IPV4 address', required=True,
                         type=str, help=
                         'DB host to connect (must be valid IPV4 address)')
+    parser.add_argument('--port', type=int, required=True, help=
+                        'Port number to use for connection')
     args = parser.parse_args()
     host = args.host
     if not is_valid_ip_address(host):
