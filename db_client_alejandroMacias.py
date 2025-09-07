@@ -7,6 +7,8 @@ import time
 import json
 from common import is_valid_ip_address, Student
 from maskpass import askpass
+MENU_OPTIONS = ["Add student to database", "Search student by name", "Search student by age", "Quit"]
+OPTION_COUNT: int = len(MENU_OPTIONS)
 def is_host_reachable(ip_address: str) -> bool:
     TIMEOUT_SECONDS: int = 5
     is_windows_os = platform.system().lower() == 'windows'
@@ -26,13 +28,12 @@ def print_menu():
           This program comes with ABSOLUTELY NO WARRANTY.
           This is free software, and you are welcome to redistribute it
           under certain conditions.\n
-          1. Add student to database
-          2. Search by name
-          3. Search by age
-          4. Quit
           ")
+    for option in MENU_OPTIONS:
+        option_index: str = MENU_OPTIONS.index(option)
+        print(option_index + ". " + option)
 def select_option() -> int:
-    VALID_OPTIONS = range(1,5)
+    VALID_OPTIONS = range(1, OPTION_COUNT + 1)
     try:
         option_selected: int = int(input("Select an option: "))
     except TypeError:
