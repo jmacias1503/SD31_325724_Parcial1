@@ -21,6 +21,12 @@ def decode_payload(encoded_payload):
     Decodes the encoded json payload
     """
     return json.loads(encoded_payload.decode('utf-8'))
+def add_student(payload, columns, csv_file, log_file):
+    data = payload.get("data")
+    with LOCK_RESOURCE:
+        df = pandas.DataFrame([data], columns=columns)
+        df.to_csv(csv_file, mode='a', header=False, index=False)
+    insert_to_log(payload, log_file)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple Database server")
     parser.add_argument('--address', default='127.0.0.1', nargs='?', type=str, help=
