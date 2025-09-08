@@ -1,7 +1,17 @@
 import pandas
 import argparse
 import socket
+import threading
+import time
 from common import is_valid_ip_address
+LOCK_RESOURCE = threading.lock()
+def insert_to_log(log_file: str, query_type, payload):
+    """
+    Inserts actions to log file
+    """
+    with LOCK_RESOURCE:
+        with open(log_file, "a") as file:
+            file.write(f"[{time.time()}];{query_type};{payload}")
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple Database server")
     parser.add_argument('--address', default='127.0.0.1', nargs='?', type=str, help=
