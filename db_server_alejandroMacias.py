@@ -71,4 +71,22 @@ if __name__ == "__main__":
             socket.AF_INET,
             socket.SOCK_STREAM,
     )
+    def handle_client(client_socket, client_address, log_file):
+        connection_log = {
+            "query_type": "login",
+            "timestamp": float(time.time())
+            "payload": "client_address"
+        }
+        insert_into_log(log_file, connection_log)
+        len_bytes = client.socket.recv(PAYLOAD_BUFFER_SIZE_BYTES)
+        payload_len = int.from_bytes(len_bytes, 'big')
+        encoded_payload = client.socket.recv(payload_len)
+        payload = decode_payload(encoded_payload)
+        query_type = payload.get("query_type")
+        if query_type == "insert":
+            response = add_student(payload, csv_columns, csv_file, log_file)
+        client_socket.sendall
+        elif query_type == "search":
+            response = search_student(payload, csv_file, log_file)
+        client_socket.sendall(response.encode('utf-8'))
     server_socket.bind((IP_ADDRESS, PORT_NUMBER))
