@@ -114,8 +114,16 @@ def add_student(client_socket, host: str, port_number: int):
     age: int = int(input("Enter student's age: "))
     email: str = input("Enter student's email: ")
     major: str = input("Enter student's major: ")
-    student = vars(Student(name, password, gender, age, email, major))
-    payload = create_payload("insert", student)
+    student = Student(name, password, gender, age, email, major)
+    data = {
+        "name": student.get_name(),
+        "password": student.get_password(),
+        "gender": student.get_gender(),
+        "age": student.get_age(),
+        "email": student.get_email(),
+        "major": student.get_major()
+    }
+    payload = create_payload("insert", data)
     send_payload(payload, client_socket, host, port_number)
 def search_student(argument: str, value, client_socket, host: str, port_number: int):
     """
