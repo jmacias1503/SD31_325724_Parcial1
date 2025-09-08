@@ -18,27 +18,27 @@ class Student:
         self.__age = age
         self.__email = email
         self.__major = major
-    def get_name() -> str:
+    def get_name(self) -> str:
         return self.__name
     def set_name(new_name: str):
         self.__name = new_name
-    def get_password() -> str:
+    def get_password(self) -> str:
         return self.__password
     def set_password(new_password: str):
         self.__password = new_password
-    def get_gender() -> str:
+    def get_gender(self) -> str:
         return self.__gender
     def set_gender(new_gender: str):
         self.__gender = new_gender
-    def get_age() -> int:
+    def get_age(self) -> int:
         return self.age
     def set_age(new_age: int):
         self.__age = new_age
-    def get_email() -> str:
+    def get_email(self) -> str:
         return self.__email
     def set_email(new_email: str):
         self.__email = new_email
-    def get_major() -> str:
+    def get_major(self) -> str:
         return self.__major
     def set_major(new_major):
         self.__major = new_major
