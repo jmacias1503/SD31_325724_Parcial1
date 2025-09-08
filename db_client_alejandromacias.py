@@ -14,6 +14,7 @@ from common import is_valid_ip_address, Student, PAYLOAD_BUFFER_SIZE_BYTES
 MENU_OPTIONS = ("Add student to database", "Search student", "Quit")
 MENU_OPTION_COUNT: int = len(MENU_OPTIONS)
 SEARCH_OPTIONS = ("name", "email", "age", "gender")
+SEARCH_OPTIONS_COUNT: int = len(SEARCH_OPTIONS)
 def is_host_reachable(ip_address: str) -> bool:
     """
     Pings the host to see if it is reachable
