@@ -34,8 +34,9 @@ def add_student(payload, columns, csv_file, log_file) -> str:
     }
     return response
 def search_student(payload, csv_file, log_file) -> str:
-    argument = payload.get("payload").get("argument")
-    value = payload.get("payload").get("value")
+    data = payload.get("payload")
+    argument = data.get("argument")
+    value = data.get("value")
     with LOCK_RESOURCE:
         df = pandas.read_csv(csv_file)
         if argument not in df.columns:
