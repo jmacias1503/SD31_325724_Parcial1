@@ -45,14 +45,14 @@ def print_main_menu():
           )
     for option in MENU_OPTIONS:
         option_index: str = MENU_OPTIONS.index(option)
-        print(option_index + ". " + option)
+        print(str(option_index) + ". " + option)
 def print_search_menu():
     """
     Prints the options for selecting the search argument
     """
     for option in SEARCH_OPTIONS:
         option_index: str = SEARCH_OPTIONS.index(option)
-        print(option_index + ". Search by " + option)
+        print(str(option_index) + ". Search by " + option)
 def select_option() -> int:
     """
     Asks input of the user and returns a valid option
