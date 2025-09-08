@@ -84,9 +84,9 @@ if __name__ == "__main__":
         payload = decode_payload(encoded_payload)
         query_type = payload.get("query_type")
         if query_type == "insert":
-            response = add_student(payload, csv_columns, csv_file, log_file)
+            response = json.dumps(add_student(payload, csv_columns, csv_file, log_file))
         elif query_type == "search":
-            response = search_student(payload, csv_file, log_file)
+            response = json.dumps(search_student(payload, csv_file, log_file))
         client_socket.sendall(response.encode('utf-8'))
     server_socket.bind((IP_ADDRESS, PORT_NUMBER))
     server_socket.listen(5)
