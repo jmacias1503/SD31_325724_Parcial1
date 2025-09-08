@@ -76,7 +76,7 @@ if __name__ == "__main__":
         connection_log = {
             "query_type": "login",
             "timestamp": float(time.time()),
-            "payload": "client_address"
+            "payload": client_address
         }
         insert_to_log(log_file, connection_log)
         len_bytes = client_socket.recv(PAYLOAD_BUFFER_SIZE_BYTES)
