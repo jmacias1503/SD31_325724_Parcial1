@@ -88,12 +88,12 @@ def send_payload(payload, client_socket, host: str, port_number: int):
     """
     Encodes the data for payload sending, checks connection & sends the payload
     """
-    payload_size_bytes = 4
+    payload_buffer_size_bytes = 4
     serialized_data = json.dumps(payload).encode('utf-8')
     len_payload = len(serialized_data)
     client_socket.connect((host, port_number))
     check_socket_connection(client_socket)
-    client_socket.send(len_payload.to_bytes(payload_size_bytes, 'big'))
+    client_socket.send(len_payload.to_bytes(payload_buffer_size_bytes, 'big'))
     client_socket.send(serialized_data)
     client_socket.close()
 def add_student(client_socket, host: str, port_number: int):
