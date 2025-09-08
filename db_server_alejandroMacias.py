@@ -27,6 +27,16 @@ def add_student(payload, columns, csv_file, log_file):
         df = pandas.DataFrame([data], columns=columns)
         df.to_csv(csv_file, mode='a', header=False, index=False)
     insert_to_log(payload, log_file)
+def search_student(payload, csv_file):
+    argument = payload.get("payload").get("argument")
+    value = payload.get("payload").get("value")
+    with LOCK_RESOURCE:
+        df = pandas.read_csv(csv_file)
+        if argument not in df.columns:
+            raise Exception("Column not found")
+        results = df[df[argument] == value]
+        response = results.to_json(orient='records')
+        return response
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple Database server")
     parser.add_argument('--address', default='127.0.0.1', nargs='?', type=str, help=
