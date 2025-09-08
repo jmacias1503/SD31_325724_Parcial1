@@ -148,3 +148,20 @@ if __name__ == "__main__":
             socket.AF_INET,
             socket.SOCK_STREAM
             )
+    while True:
+        print_main_menu()
+        option = select_option(range(1,MENU_OPTION_COUNT + 1))
+        match option:
+            case 1:
+                add_student(client_socket, HOST, PORT_NUMBER)
+            case 2:
+                print_search_menu()
+                argument = SEARCH_OPTIONS[select_option(range(1, SEARCH_OPTIONS_COUNT + 1)) - 1]
+                value = input(f"Enter value of {argument}: ")
+                search_student(argument, value, client_socket, HOST, PORT_NUMBER)
+            case 3:
+                print("Goodbye")
+                exit
+            case _:
+                print("Invalid option")
+                continue
