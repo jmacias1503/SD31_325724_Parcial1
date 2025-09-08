@@ -57,8 +57,10 @@ if __name__ == "__main__":
         csv_columns = ("nombre", "password", "genero", "edad", "email", "carrera")
     else:
         csv_columns = ("name", "password", "gender", "age", "email", "major")
+    csv_file = args.dbfile
     IP_ADDRESS: str = args.address
     PORT_NUMBER: int = args.port
+    log_file = "db.log"
     if not is_valid_ip_address(IP_ADDRESS):
         raise argparse.ArgumentTypeError("Invalid IP address")
     server_socket = socket.socket(
