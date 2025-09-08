@@ -90,3 +90,9 @@ if __name__ == "__main__":
             response = search_student(payload, csv_file, log_file)
         client_socket.sendall(response.encode('utf-8'))
     server_socket.bind((IP_ADDRESS, PORT_NUMBER))
+    server_socket.listen(5)
+    print("Hearing connections")
+    while True:
+        client_socket, address = server_socket.accept()
+        client_handler = threading.Thread(target=handle_client, args=(client_socket, address, log_file))
+        client_handler.start()
