@@ -44,7 +44,7 @@ if __name__ == "__main__":
                         'IP address for serving the database (default 127.0.0.1)')
     parser.add_argument('--port', default=3000, nargs='?', type=int, help=
                         'Port number to use (default 3000)')
-    parser.add_argument('--followreqs', action="store_true", nargs='?', default=False,
+    parser.add_argument('--followreqs', action="store_true", default=False,
                         help='Follow csv requirements')
     parser.add_argument('--dbfile', default='DB.csv', nargs='?', type=str, help=
                         'Database file to use (default DB.csv)')
