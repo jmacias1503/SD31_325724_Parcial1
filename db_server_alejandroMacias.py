@@ -78,9 +78,9 @@ if __name__ == "__main__":
             "payload": "client_address"
         }
         insert_to_log(log_file, connection_log)
-        len_bytes = client.socket.recv(PAYLOAD_BUFFER_SIZE_BYTES)
+        len_bytes = client_socket.recv(PAYLOAD_BUFFER_SIZE_BYTES)
         payload_len = int.from_bytes(len_bytes, 'big')
-        encoded_payload = client.socket.recv(payload_len)
+        encoded_payload = client_socket.recv(payload_len)
         payload = decode_payload(encoded_payload)
         query_type = payload.get("query_type")
         if query_type == "insert":
