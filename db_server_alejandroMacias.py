@@ -10,6 +10,8 @@ if __name__ == "__main__":
                         'Port number to use (default 3000)')
     parser.add_argument('--followreqs', action="store_true", nargs='?', default=False,
                         help='Follow csv requirements')
+    parser.add_argument('--dbfile', default='DB.csv', nargs='?', type=str, help=
+                        'Database file to use (default DB.csv)')
     args = parser.parse_args()
     if args.followreqs:
         csv_columns = ("nombre", "password", "genero", "edad", "email", "carrera")
