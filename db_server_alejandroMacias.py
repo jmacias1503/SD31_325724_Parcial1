@@ -27,7 +27,11 @@ def add_student(payload, columns, csv_file, log_file) -> str:
         df = pandas.DataFrame([data], columns=columns)
         df.to_csv(csv_file, mode='a', header=False, index=False)
     insert_to_log(payload, log_file)
-    return "Student added"
+    response = {
+        "status": "Created"
+        "response": "Student created"
+    }
+    return response
 def search_student(payload, csv_file, log_file) -> str:
     argument = payload.get("payload").get("argument")
     value = payload.get("payload").get("value")
