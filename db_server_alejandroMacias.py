@@ -15,7 +15,7 @@ def insert_to_log(log_file: str, payload):
     data = payload.get("payload")
     with LOCK_RESOURCE:
         with open(log_file, "a") as file:
-            file.write(f"[{time.time()}];{query_type};{data}")
+            file.write(f"{transaction_time};{query_type};{data}")
 def decode_payload(encoded_payload):
     """
     Decodes the encoded json payload
