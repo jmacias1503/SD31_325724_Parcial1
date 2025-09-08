@@ -136,7 +136,7 @@ def search_student(argument: str, value, client_socket, host: str, port_number: 
         "argument": argument,
         "value": value
     }
-    payload = create_payload("insert", search_payload)
+    payload = create_payload("search", search_payload)
     send_payload(payload, client_socket, host, port_number)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple database client")
