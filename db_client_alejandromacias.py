@@ -44,14 +44,14 @@ def print_main_menu():
           "under certain conditions.\n"
           )
     for option in MENU_OPTIONS:
-        option_index: str = MENU_OPTIONS.index(option)
+        option_index: str = MENU_OPTIONS.index(option) + 1
         print(str(option_index) + ". " + option)
 def print_search_menu():
     """
     Prints the options for selecting the search argument
     """
     for option in SEARCH_OPTIONS:
-        option_index: str = SEARCH_OPTIONS.index(option)
+        option_index: str = SEARCH_OPTIONS.index(option) + 1
         print(str(option_index) + ". Search by " + option)
 def select_option() -> int:
     """
