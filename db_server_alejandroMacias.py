@@ -3,6 +3,7 @@ import argparse
 import socket
 import threading
 import time
+import json
 from common import is_valid_ip_address
 LOCK_RESOURCE = threading.lock()
 def insert_to_log(log_file: str, payload):
@@ -14,6 +15,11 @@ def insert_to_log(log_file: str, payload):
     with LOCK_RESOURCE:
         with open(log_file, "a") as file:
             file.write(f"[{time.time()}];{query_type};{data}")
+def decode_payload(encoded_payload):
+    """
+    Decodes the encoded json payload
+    """
+    return json.loads(encoded_payload.decode('utf-8'))
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple Database server")
     parser.add_argument('--address', default='127.0.0.1', nargs='?', type=str, help=
