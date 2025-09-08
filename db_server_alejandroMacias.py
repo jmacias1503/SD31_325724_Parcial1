@@ -28,7 +28,7 @@ def add_student(payload, columns, csv_file, log_file) -> str:
         df.to_csv(csv_file, mode='a', header=False, index=False)
     insert_to_log(payload, log_file)
     response = {
-        "status": "Created"
+        "status": "Created",
         "response": "Student created"
     }
     return response
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     def handle_client(client_socket, client_address, log_file):
         connection_log = {
             "query_type": "login",
-            "timestamp": float(time.time())
+            "timestamp": float(time.time()),
             "payload": "client_address"
         }
         insert_into_log(log_file, connection_log)
