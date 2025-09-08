@@ -22,7 +22,7 @@ def decode_payload(encoded_payload):
     """
     return json.loads(encoded_payload.decode('utf-8'))
 def add_student(payload, columns, csv_file, log_file) -> str:
-    data = payload.get("data")
+    data = payload.get("payload")
     with LOCK_RESOURCE:
         df = pandas.DataFrame([data], columns=columns)
         df.to_csv(csv_file, mode='a', header=False, index=False)
