@@ -4,7 +4,7 @@ import socket
 import threading
 import time
 import json
-from common import is_valid_ip_address
+from common import is_valid_ip_address, PAYLOAD_BUFFER_SIZE_BYTES
 LOCK_RESOURCE = threading.Lock()
 def insert_to_log(log_file: str, payload):
     """
