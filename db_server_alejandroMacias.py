@@ -26,7 +26,7 @@ def add_student(payload, columns, csv_file, log_file) -> str:
     with LOCK_RESOURCE:
         df = pandas.DataFrame([data], columns=columns)
         df.to_csv(csv_file, mode='a', header=False, index=False)
-    insert_to_log(payload, log_file)
+    insert_to_log(log_file, payload)
     response = {
         "status": "Created",
         "response": "Student created"
