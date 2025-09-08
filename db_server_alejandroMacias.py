@@ -8,6 +8,8 @@ if __name__ == "__main__":
                         'IP address for serving the database (default 127.0.0.1)')
     parser.add_argument('--port', default=3000, nargs='?', type=int, help=
                         'Port number to use (default 3000)')
+    parser.add_argument('--follow-reqs', action="store_true", nargs='?', default=False,
+                        help='Follow csv requirements')
     args = parser.parse_args()
     IP_ADDRESS: str = args.address
     PORT_NUMBER: int = args.port
