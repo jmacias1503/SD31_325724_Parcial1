@@ -13,6 +13,9 @@ if __name__ == "__main__":
     parser.add_argument('--dbfile', default='DB.csv', nargs='?', type=str, help=
                         'Database file to use (default DB.csv)')
     args = parser.parse_args()
+    is_csv_file = args.dbfile.split('.')[1] == 'csv'
+    if not is_csv_file:
+        raise argparse.ArgumentTypeError("Invalid file")
     if args.followreqs:
         csv_columns = ("nombre", "password", "genero", "edad", "email", "carrera")
     else:
