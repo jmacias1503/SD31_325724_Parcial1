@@ -41,7 +41,7 @@ def search_student(payload, csv_file, log_file) -> str:
             raise Exception("Column not found")
         results = df[df[argument] == value]
         response = results.to_json(orient='records')
-        insert_to_log(payload, log_file)
+        insert_to_log(log_file, payload)
         return response
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = "DS Simple Database server")
