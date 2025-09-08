@@ -24,7 +24,8 @@ def decode_payload(encoded_payload):
 def add_student(payload, columns, csv_file, log_file) -> str:
     data = payload.get("payload")
     with LOCK_RESOURCE:
-        df = pandas.DataFrame([data], columns=columns)
+        ordered_values = [data.get(col) for col in columns]
+        df = pandas.DataFrame([ordered_values], columns=columns)
         df.to_csv(csv_file, mode='a', header=False, index=False)
     insert_to_log(log_file, payload)
     response = {
