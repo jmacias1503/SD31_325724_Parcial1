@@ -77,7 +77,7 @@ if __name__ == "__main__":
             "timestamp": float(time.time()),
             "payload": "client_address"
         }
-        insert_into_log(log_file, connection_log)
+        insert_to_log(log_file, connection_log)
         len_bytes = client.socket.recv(PAYLOAD_BUFFER_SIZE_BYTES)
         payload_len = int.from_bytes(len_bytes, 'big')
         encoded_payload = client.socket.recv(payload_len)
