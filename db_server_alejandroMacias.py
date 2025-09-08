@@ -5,7 +5,7 @@ import threading
 import time
 import json
 from common import is_valid_ip_address
-LOCK_RESOURCE = threading.lock()
+LOCK_RESOURCE = threading.Lock()
 def insert_to_log(log_file: str, payload):
     """
     Inserts actions to log file
