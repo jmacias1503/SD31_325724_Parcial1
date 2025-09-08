@@ -53,11 +53,10 @@ def print_search_menu():
     for option in SEARCH_OPTIONS:
         option_index: str = SEARCH_OPTIONS.index(option) + 1
         print(str(option_index) + ". Search by " + option)
-def select_option() -> int:
+def select_option(valid_options) -> int:
     """
     Asks input of the user and returns a valid option
     """
-    valid_options = range(1, OPTION_COUNT + 1)
     try:
         option_selected: int = int(input("Select an option: "))
     except TypeError:
