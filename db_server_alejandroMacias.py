@@ -85,7 +85,6 @@ if __name__ == "__main__":
         query_type = payload.get("query_type")
         if query_type == "insert":
             response = add_student(payload, csv_columns, csv_file, log_file)
-        client_socket.sendall
         elif query_type == "search":
             response = search_student(payload, csv_file, log_file)
         client_socket.sendall(response.encode('utf-8'))
