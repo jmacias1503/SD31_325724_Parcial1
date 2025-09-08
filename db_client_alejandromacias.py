@@ -10,7 +10,7 @@ import socket
 import time
 import json
 from maskpass import askpass
-from common import is_valid_ip_address, Student
+from common import is_valid_ip_address, Student, PAYLOAD_BUFFER_SIZE_BYTES
 MENU_OPTIONS = ("Add student to database", "Search student", "Quit")
 MENU_OPTION_COUNT: int = len(MENU_OPTIONS)
 SEARCH_OPTIONS = ("name", "email", "age", "gender")
@@ -88,12 +88,11 @@ def send_payload(payload, client_socket, host: str, port_number: int):
     """
     Encodes the data for payload sending, checks connection & sends the payload
     """
-    payload_buffer_size_bytes = 24
     serialized_data = json.dumps(payload).encode('utf-8')
     len_payload = len(serialized_data)
     client_socket.connect((host, port_number))
     check_socket_connection(client_socket)
-    client_socket.send(len_payload.to_bytes(payload_buffer_size_bytes, 'big'))
+    client_socket.send(len_payload.to_bytes(PAYLOAD_BUFFER_SIZE_BYTES, 'big'))
     client_socket.send(serialized_data)
     client_socket.close()
 def add_student(client_socket, host: str, port_number: int):

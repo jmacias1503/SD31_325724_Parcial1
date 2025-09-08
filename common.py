@@ -1,3 +1,4 @@
+PAYLOAD_BUFFER_SIZE_BYTES = 24
 def is_valid_ip_address(ip_address: str) -> bool:
     values = ip_address.split('.')
     if len(values) != 4:
