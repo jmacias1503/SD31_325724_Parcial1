@@ -88,7 +88,7 @@ def send_payload(payload, client_socket, host: str, port_number: int):
     """
     Encodes the data for payload sending, checks connection & sends the payload
     """
-    serialized_data = json.dumps(payload).encode('utf-8')
+    serialized_data = json.dumps(payload.encode('utf-8'))
     len_payload = len(serialized_data)
     client_socket.connect((host, port_number))
     check_socket_connection(client_socket)
