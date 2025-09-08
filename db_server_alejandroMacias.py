@@ -84,7 +84,6 @@ if __name__ == "__main__":
         payload_len = int.from_bytes(len_bytes, 'big')
         encoded_payload = client_socket.recv(payload_len)
         payload = decode_payload(encoded_payload)
-        payload = dict(payload)
         query_type = payload.get("query_type")
         if query_type == "insert":
             response = json.dumps(add_student(payload, csv_columns, csv_file, log_file))
