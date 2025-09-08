@@ -11,6 +11,7 @@ def insert_to_log(log_file: str, payload):
     Inserts actions to log file
     """
     query_type = payload.get("query_type")
+    transaction_time = payload.get("timestamp")
     data = payload.get("payload")
     with LOCK_RESOURCE:
         with open(log_file, "a") as file:
