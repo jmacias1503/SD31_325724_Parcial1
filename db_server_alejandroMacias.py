@@ -5,10 +5,11 @@ import threading
 import time
 from common import is_valid_ip_address
 LOCK_RESOURCE = threading.lock()
-def insert_to_log(log_file: str, query_type, payload):
+def insert_to_log(log_file: str, payload):
     """
     Inserts actions to log file
     """
+    query_type = payload.get("query_type")
     with LOCK_RESOURCE:
         with open(log_file, "a") as file:
             file.write(f"[{time.time()}];{query_type};{payload}")
