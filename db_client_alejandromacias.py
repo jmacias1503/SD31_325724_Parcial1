@@ -11,9 +11,9 @@ import time
 import json
 from maskpass import askpass
 from common import is_valid_ip_address, Student
-MENU_OPTIONS = ["Add student to database", "Search student", "Quit"]
-OPTION_COUNT: int = len(MENU_OPTIONS)
-SEARCH_OPTIONS = ["name", "email", "age", "gender"]
+MENU_OPTIONS = ("Add student to database", "Search student", "Quit")
+MENU_OPTION_COUNT: int = len(MENU_OPTIONS)
+SEARCH_OPTIONS = ("name", "email", "age", "gender")
 def is_host_reachable(ip_address: str) -> bool:
     """
     Pings the host to see if it is reachable
@@ -61,10 +61,10 @@ def select_option(valid_options) -> int:
         option_selected: int = int(input("Select an option: "))
     except TypeError:
         print(f"Not valid input")
-        select_option()
+        select_option(valid_options)
     if option_selected not in valid_options:
         print("Option not valid. Try again")
-        select_option()
+        select_option(valid_options)
     return option_selected
 def hash_password(unhashed_password: str) -> str:
     """
