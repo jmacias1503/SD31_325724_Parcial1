@@ -31,7 +31,7 @@ class Student:
     def set_gender(new_gender: str):
         self.__gender = new_gender
     def get_age(self) -> int:
-        return self.age
+        return self.__age
     def set_age(new_age: int):
         self.__age = new_age
     def get_email(self) -> str:
