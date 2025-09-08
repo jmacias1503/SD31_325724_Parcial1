@@ -21,13 +21,14 @@ def decode_payload(encoded_payload):
     Decodes the encoded json payload
     """
     return json.loads(encoded_payload.decode('utf-8'))
-def add_student(payload, columns, csv_file, log_file):
+def add_student(payload, columns, csv_file, log_file) -> str:
     data = payload.get("data")
     with LOCK_RESOURCE:
         df = pandas.DataFrame([data], columns=columns)
         df.to_csv(csv_file, mode='a', header=False, index=False)
     insert_to_log(payload, log_file)
-def search_student(payload, csv_file, log_file):
+    return "Student added"
+def search_student(payload, csv_file, log_file) -> str:
     argument = payload.get("payload").get("argument")
     value = payload.get("payload").get("value")
     with LOCK_RESOURCE:
